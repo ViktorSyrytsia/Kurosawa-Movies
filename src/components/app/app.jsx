@@ -9,7 +9,7 @@ import Header from '../header/header';
 function App() {
         return (
                 <>
-                        <Header />
+                        <Header numItems={2} total={350} />
                         <Switch>
                                 <Route path="/" component={HomePage} exact />
                                 <Route path="/cart" component={CartPage} />

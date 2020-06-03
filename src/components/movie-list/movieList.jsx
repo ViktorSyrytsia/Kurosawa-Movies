@@ -11,23 +11,17 @@ const MovieList = ({ movies, movieService, moviesLoaded }) => {
 
         useEffect(() => {
                 const data = movieService.getMovies();
-                console.log(data);
                 moviesLoaded(data);
-
-
-
         }, [])
 
         return (
-                <ul>
+                <div className="movies-grid">
                         {movies.map((movie) => {
                                 return (
-                                        <li key={Math.random() + movie.id}>
-                                                <MovieListItem key={movie.id} movie={movie} />
-                                        </li>
+                                        <MovieListItem key={movie.id} movie={movie} />
                                 )
                         })}
-                </ul>
+                </div>
         )
 }
 

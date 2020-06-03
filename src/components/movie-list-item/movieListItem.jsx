@@ -4,19 +4,20 @@ import './movieListItem.scss';
 
 const MovieListItem = ({ movie }) => {
 
-        const { title, year } = movie
+        const { title, year, text, img, price } = movie
 
         return (
-                <div class="card mb-3">
-                        <h3 class="card-header">{title}</h3>
-                        <div class="card-body">
-                                <h5 class="card-title">{year}</h5>
-                                <h6 class="card-subtitle text-muted">Support card subtitle</h6>
+                <div className="card mb-3">
+                        <h3 className="card-header">{title}</h3>
+                        <div className="card-body">
+                                <h5 className="card-title">{year}</h5>
+                                <h6 className="card-subtitle text-muted">Price: ${price}</h6>
                         </div>
-                        <img></img>
-                        <div class="card-body">
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <img className="card-img" src={img} alt="poster" ></img>
+                        <div className="card-body">
+                                <p className="card-text">{text}</p>
                         </div>
+                        <button type="button" className="btn btn-outline-primary">Add</button>
                 </div>
         )
 }
