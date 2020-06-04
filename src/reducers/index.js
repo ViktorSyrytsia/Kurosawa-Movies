@@ -2,8 +2,7 @@ const initialState = {
         movies: [],
         loading: true,
         error: null,
-        cartItems: [],
-        orderTotal: 0
+        cartItems: []
 };
 
 const updateCartItems = (cartItems, item, index) => {

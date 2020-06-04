@@ -22,6 +22,7 @@ const ShoppingCart = ({ items, onIncrease, onDecrease, onDelete }) => {
                                                 <th scope="col">Title</th>
                                                 <th scope="col">Count</th>
                                                 <th scope="col">Price</th>
+                                                <th scope="col"></th>
                                         </tr>
                                 </thead>
                                 <tbody>
@@ -54,8 +55,11 @@ const ShoppingCart = ({ items, onIncrease, onDecrease, onDelete }) => {
                                         }
                                 </tbody>
                         </table>
-                        <div className="total">Total: ${sum}</div>
-                        <button type="button" className="btn btn-outline-success check-btn">Success</button>
+                        <div className="check">
+                                <div className="check-total">Total: ${sum}</div>
+                                <button type="button" className="btn btn-outline-success check-btn">Check</button>
+                        </div>
+
                 </div>
         )
 }

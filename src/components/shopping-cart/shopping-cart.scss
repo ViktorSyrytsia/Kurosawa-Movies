@@ -1,13 +1,6 @@
 .shopping-cart {
   margin: 50px 50px;
-  position: relative;
   margin-bottom: 200px;
-}
-.check-btn {
-  margin-bottom: 100px;
-  position: absolute;
-  right: 25px;
-  top: 380px;
 }
 
 .buttons-cart {
@@ -25,4 +18,19 @@
 
 .minus {
   font-weight: bold;
+}
+
+.check {
+  margin-top: 50px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  &-btn {
+    margin-left: 50px;
+  }
+  &-total {
+    font-size: 18px;
+    font-weight: bold;
+  }
 }
