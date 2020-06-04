@@ -32,6 +32,18 @@ const movieAddToCart = (movieId) => {
                 payload: movieId
         }
 }
+const movieRemoveFromCart = (movieId) => {
+        return {
+                type: 'MOVIE_REMOVE_FROM_CART',
+                payload: movieId
+        }
+}
+const AllMoviesRemoveFromCart = (movieId) => {
+        return {
+                type: 'ALL_MOVIES_REMOVE_FROM_CART',
+                payload: movieId
+        }
+}
 
 
-export { fetchMovies, movieAddToCart };
+export { fetchMovies, movieAddToCart, movieRemoveFromCart, AllMoviesRemoveFromCart };

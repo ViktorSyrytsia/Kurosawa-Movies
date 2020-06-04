@@ -21,6 +21,7 @@ const MovieListItem = ({ movie, onAddToCart }) => {
                                 type="button"
                                 className="btn btn-outline-primary"
                                 onClick={onAddToCart}
+
                         >Add</button>
                 </div>
         )

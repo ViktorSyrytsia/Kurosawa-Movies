@@ -3,10 +3,18 @@ const initialState = {
         loading: true,
         error: null,
         cartItems: [],
-        orderTotal: 400
+        orderTotal: 0
 };
 
 const updateCartItems = (cartItems, item, index) => {
+
+        if (item.count === 0) {
+                return [
+                        ...cartItems.slice(0, index),
+                        ...cartItems.slice(index + 1)
+                ]
+        }
+
         if (index < 0) {
                 return [
                         ...cartItems,
@@ -19,6 +27,40 @@ const updateCartItems = (cartItems, item, index) => {
                 ...cartItems.slice(index + 1)
         ];
 }
+
+const updateCartItem = (movie, item, quantity) => {
+
+
+        if (item) {
+                return {
+                        ...item,
+                        count: item.count + quantity,
+                        total: item.total + movie.price * quantity
+                }
+        } else {
+                return {
+                        id: movie.id,
+                        title: movie.title,
+                        count: 1,
+                        total: movie.price
+                };
+        }
+}
+
+const updateOrder = (state, movieId, quantity) => {
+        const { movies, cartItems } = state;
+
+        const movie = movies.find(({ id }) => id === movieId);
+        const itemIndex = cartItems.findIndex(({ id }) => id === movieId);
+        const item = cartItems[itemIndex];
+        const newCartItem = updateCartItem(movie, item, quantity);
+
+        return {
+                ...state,
+                cartItems: updateCartItems(cartItems, newCartItem, itemIndex)
+        };
+}
+
 
 const reducer = (state = initialState, action) => {
 
@@ -46,32 +88,17 @@ const reducer = (state = initialState, action) => {
                         }
 
                 case 'MOVIE_ADD_TO_CART':
-                        const movieId = action.payload;
-                        const movie = state.movies.find((movie) => movie.id === movieId);
-                        const itemIndex = state.cartItems.findIndex(({ id }) => id === movieId);
-                        const item = state.cartItems[itemIndex];
+                        return updateOrder(state, action.payload, 1)
 
-                        let newCartItem;
+                case 'MOVIE_REMOVE_FROM_CART':
+                        return updateOrder(state, action.payload, -1)
 
-                        if (item) {
-                                newCartItem = {
-                                        ...item,
-                                        count: item.count + 1,
-                                        total: item.total + movie.price
-                                }
-                        } else {
-                                newCartItem = {
-                                        id: movie.id,
-                                        title: movie.title,
-                                        count: 1,
-                                        total: movie.price
-                                };
-                        }
+                case 'ALL_MOVIES_REMOVE_FROM_CART':
+                        const item = state.cartItems.find(({ id }) => id === action.payload);
+                        return updateOrder(state, action.payload, -item.count)
 
-                        return {
-                                ...state,
-                                cartItems: updateCartItems(state.cartItems, newCartItem, itemIndex)
-                        };
+
+
 
                 default:
                         return state

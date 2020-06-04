@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { movieAddToCart, movieRemoveFromCart, AllMoviesRemoveFromCart } from '../../actions';
 
 import './shopping-cart.scss'
 
@@ -28,9 +29,18 @@ const ShoppingCart = ({ items, total, onIncrease, onDecrease, onDelete }) => {
                                                                         <td>{count}</td>
                                                                         <td>{total}</td>
                                                                         <td className="buttons-cart">
-                                                                                <button onClick={() => onIncrease(id)} type="button" className="btn btn-outline-success btn-sm plus">Plus</button>
-                                                                                <button onClick={() => onDecrease(id)} type="button" className="btn btn-outline-warning btn-sm minus">Minus</button>
-                                                                                <button onClick={() => onDelete(id)} type="button" className="btn btn-outline-danger btn-sm">Delete</button>
+                                                                                <button
+                                                                                        onClick={() => onIncrease(id)}
+                                                                                        type="button"
+                                                                                        className="btn btn-outline-success btn-sm plus">Plus</button>
+                                                                                <button
+                                                                                        onClick={() => onDecrease(id)}
+                                                                                        type="button"
+                                                                                        className="btn btn-outline-warning btn-sm minus">Minus</button>
+                                                                                <button
+                                                                                        onClick={() => onDelete(id)}
+                                                                                        type="button"
+                                                                                        className="btn btn-outline-danger btn-sm">Delete</button>
                                                                         </td>
                                                                 </tr>
                                                         )
@@ -51,19 +61,10 @@ const mapStateToProps = ({ cartItems, orderTotal }) => {
         };
 };
 
-const mapDispatchToProps = () => {
-        return {
-                onIncrease: (id) => {
-                        console.log(`increase ${id}`);
-                },
-                onDecrease: (id) => {
-                        console.log(`decrease ${id}`);
-                },
-                onDelete: (id) => {
-                        console.log(`delete ${id}`);
-                }
-        }
+const mapDispatchToProps = {
+        onIncrease: movieAddToCart,
+        onDecrease: movieRemoveFromCart,
+        onDelete: AllMoviesRemoveFromCart
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCart);
