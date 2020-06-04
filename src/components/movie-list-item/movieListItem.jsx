@@ -2,7 +2,7 @@ import React from 'react';
 
 import './movieListItem.scss';
 
-const MovieListItem = ({ movie }) => {
+const MovieListItem = ({ movie, onAddToCart }) => {
 
         const { title, year, text, img, price } = movie
 
@@ -17,7 +17,11 @@ const MovieListItem = ({ movie }) => {
                         <div className="card-body">
                                 <p className="card-text">{text}</p>
                         </div>
-                        <button type="button" className="btn btn-outline-primary">Add</button>
+                        <button
+                                type="button"
+                                className="btn btn-outline-primary"
+                                onClick={onAddToCart}
+                        >Add</button>
                 </div>
         )
 }

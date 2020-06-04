@@ -26,4 +26,12 @@ const fetchMovies = (movieService, dispatch) => () => {
 }
 
 
-export { fetchMovies };
+const movieAddToCart = (movieId) => {
+        return {
+                type: 'MOVIE_ADD_TO_CART',
+                payload: movieId
+        }
+}
+
+
+export { fetchMovies, movieAddToCart };

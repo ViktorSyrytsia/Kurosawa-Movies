@@ -2,12 +2,23 @@ const initialState = {
         movies: [],
         loading: true,
         error: null,
-        cartItems: [
-                { id: 1, title: 'movie one', count: 1, total: 100 },
-                { id: 2, title: 'movie two', count: 3, total: 300 }
-        ],
+        cartItems: [],
         orderTotal: 400
 };
+
+const updateCartItems = (cartItems, item, index) => {
+        if (index < 0) {
+                return [
+                        ...cartItems,
+                        item
+                ];
+        }
+        return [
+                ...cartItems.slice(0, index),
+                item,
+                ...cartItems.slice(index + 1)
+        ];
+}
 
 const reducer = (state = initialState, action) => {
 
@@ -33,6 +44,34 @@ const reducer = (state = initialState, action) => {
                                 loading: false,
                                 error: action.payload
                         }
+
+                case 'MOVIE_ADD_TO_CART':
+                        const movieId = action.payload;
+                        const movie = state.movies.find((movie) => movie.id === movieId);
+                        const itemIndex = state.cartItems.findIndex(({ id }) => id === movieId);
+                        const item = state.cartItems[itemIndex];
+
+                        let newCartItem;
+
+                        if (item) {
+                                newCartItem = {
+                                        ...item,
+                                        count: item.count + 1,
+                                        total: item.total + movie.price
+                                }
+                        } else {
+                                newCartItem = {
+                                        id: movie.id,
+                                        title: movie.title,
+                                        count: 1,
+                                        total: movie.price
+                                };
+                        }
+
+                        return {
+                                ...state,
+                                cartItems: updateCartItems(state.cartItems, newCartItem, itemIndex)
+                        };
 
                 default:
                         return state

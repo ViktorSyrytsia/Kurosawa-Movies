@@ -2,19 +2,23 @@ import React, { useEffect } from 'react'
 import MovieListItem from '../movie-list-item/movieListItem';
 import { connect } from 'react-redux';
 import withMovieService from '../hoc/withMovieService';
-import { fetchMovies } from '../../actions/index.js';
+import { fetchMovies, movieAddToCart } from '../../actions/index.js';
 import Error from '../error-indicator/error';
 import Spinner from '../spinner/spinner';
 
 import './movieList.scss';
 
 
-const MoveList = ({ movies }) => {
+const MoveList = ({ movies, onAddToCart }) => {
         return (
                 <div className="movies-grid">
                         {movies.map((movie) => {
                                 return (
-                                        <MovieListItem key={movie.id} movie={movie} />
+                                        <MovieListItem
+                                                key={movie.id}
+                                                movie={movie}
+                                                onAddToCart={() => onAddToCart(movie.id)}
+                                        />
                                 )
                         })}
                 </div>
@@ -22,7 +26,7 @@ const MoveList = ({ movies }) => {
 }
 
 
-const MovieListContainer = ({ movies, loading, fetchMovies, error }) => {
+const MovieListContainer = ({ movies, loading, fetchMovies, error, onAddToCart }) => {
 
         useEffect(() => {
                 fetchMovies()
@@ -31,7 +35,7 @@ const MovieListContainer = ({ movies, loading, fetchMovies, error }) => {
         if (loading) { return (<Spinner />) }
         if (error) { return (<Error err={error} />) }
         return (
-                <MoveList movies={movies} />
+                <MoveList movies={movies} onAddToCart={onAddToCart} />
         )
 }
 
@@ -47,7 +51,8 @@ const mapStateToProps = ({ movies, loading, error }) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
         const { movieService } = ownProps;
         return {
-                fetchMovies: fetchMovies(movieService, dispatch)
+                fetchMovies: fetchMovies(movieService, dispatch),
+                onAddToCart: (id) => dispatch(movieAddToCart(id))
         }
 }
 

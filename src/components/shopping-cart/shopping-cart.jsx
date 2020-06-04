@@ -28,15 +28,14 @@ const ShoppingCart = ({ items, total, onIncrease, onDecrease, onDelete }) => {
                                                                         <td>{count}</td>
                                                                         <td>{total}</td>
                                                                         <td className="buttons-cart">
-                                                                                <button onClick={() => onIncrease(id)} type="button" className="btn btn-outline-success btn-sm plus">+</button>
-                                                                                <button onClick={() => onDecrease(id)} type="button" className="btn btn-outline-warning btn-sm minus">-</button>
+                                                                                <button onClick={() => onIncrease(id)} type="button" className="btn btn-outline-success btn-sm plus">Plus</button>
+                                                                                <button onClick={() => onDecrease(id)} type="button" className="btn btn-outline-warning btn-sm minus">Minus</button>
                                                                                 <button onClick={() => onDelete(id)} type="button" className="btn btn-outline-danger btn-sm">Delete</button>
                                                                         </td>
                                                                 </tr>
                                                         )
                                                 })
                                         }
-
                                 </tbody>
                         </table>
                         <div className="total">Total: ${total}</div>
