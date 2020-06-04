@@ -1,7 +1,14 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-const Header = ({ numItems, total }) => {
+const Header = ({ items }) => {
+        let count = 0;
+        let sum = 0;
+        for (const item of items) {
+                sum += item.total;
+                count += item.count;
+        }
         return (
                 <div>
                         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -19,11 +26,17 @@ const Header = ({ numItems, total }) => {
                                                 </li>
                                         </ul>
                                 </div>
-                                <div>Items: {numItems} (total price: ${total})</div>
+                                <div>Items: {count} (total price: ${sum})</div>
                         </nav>
 
                 </div>
         )
 }
 
-export default Header
+const mapStateToProps = ({ cartItems }) => {
+        return {
+                items: cartItems,
+        };
+};
+
+export default connect(mapStateToProps)(Header)

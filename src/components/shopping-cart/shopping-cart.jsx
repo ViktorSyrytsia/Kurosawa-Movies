@@ -5,7 +5,13 @@ import { movieAddToCart, movieRemoveFromCart, AllMoviesRemoveFromCart } from '..
 import './shopping-cart.scss'
 
 
-const ShoppingCart = ({ items, total, onIncrease, onDecrease, onDelete }) => {
+const ShoppingCart = ({ items, onIncrease, onDecrease, onDelete }) => {
+
+        let sum = 0;
+        for (const item of items) {
+                sum += item.total
+        }
+
         return (
                 <div className="shopping-cart">
                         <h2>Your order</h2>
@@ -48,16 +54,15 @@ const ShoppingCart = ({ items, total, onIncrease, onDecrease, onDelete }) => {
                                         }
                                 </tbody>
                         </table>
-                        <div className="total">Total: ${total}</div>
+                        <div className="total">Total: ${sum}</div>
                         <button type="button" className="btn btn-outline-success check-btn">Success</button>
                 </div>
         )
 }
 
-const mapStateToProps = ({ cartItems, orderTotal }) => {
+const mapStateToProps = ({ cartItems }) => {
         return {
                 items: cartItems,
-                total: orderTotal
         };
 };
 
