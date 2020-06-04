@@ -2,7 +2,9 @@ import React from 'react';
 
 import './error.scss';
 
-const Error = () => {
+const Error = ({ err }) => {
+        console.log(err);
+
         return (
                 <div>
                         Error!

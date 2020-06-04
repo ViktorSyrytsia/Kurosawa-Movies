@@ -1,13 +1,29 @@
 const initialState = {
-        movies: []
+        movies: [],
+        loading: true,
+        error: null
 };
 
 const reducer = (state = initialState, action) => {
 
         switch (action.type) {
+                case 'MOVIES_REQUESTED':
+                        return {
+                                movies: [],
+                                loading: true,
+                                error: null
+                        }
                 case 'MOVIES_LOADED':
                         return {
-                                movies: action.payload
+                                movies: action.payload,
+                                loading: false,
+                                error: null
+                        }
+                case 'MOVIES_ERROR':
+                        return {
+                                movies: [],
+                                loading: false,
+                                error: action.payload
                         }
 
                 default:
