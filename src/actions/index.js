@@ -1,22 +1,29 @@
 const moviesLoaded = (newMovies) => {
         return {
-                type: 'MOVIES_LOADED',
+                type: 'FETCH_MOVIES_SUCCESS',
                 payload: newMovies
         }
 }
 
 const moviesRequested = () => {
         return {
-                type: 'MOVIES_REQUESTED'
+                type: 'FETCH_MOVIES_REQUEST'
         }
 }
 
 const moviesError = (error) => {
         return {
-                type: 'MOVIES_ERROR',
+                type: 'FETCH_MOVIES_FAILURE',
                 payload: error
         }
 }
 
+const fetchMovies = (movieService, dispatch) => () => {
+        dispatch(moviesRequested())
+        movieService.getMovies()
+                .then((data) => dispatch(moviesLoaded(data)))
+                .catch((error) => dispatch(moviesError(error)));
+}
 
-export { moviesLoaded, moviesRequested, moviesError };
+
+export { fetchMovies };

@@ -1,26 +1,34 @@
 const initialState = {
         movies: [],
         loading: true,
-        error: null
+        error: null,
+        cartItems: [
+                { id: 1, title: 'movie one', count: 1, total: 100 },
+                { id: 2, title: 'movie two', count: 3, total: 300 }
+        ],
+        orderTotal: 400
 };
 
 const reducer = (state = initialState, action) => {
 
         switch (action.type) {
-                case 'MOVIES_REQUESTED':
+                case 'FETCH_MOVIES_REQUEST':
                         return {
+                                ...state,
                                 movies: [],
                                 loading: true,
                                 error: null
                         }
-                case 'MOVIES_LOADED':
+                case 'FETCH_MOVIES_SUCCESS':
                         return {
+                                ...state,
                                 movies: action.payload,
                                 loading: false,
                                 error: null
                         }
-                case 'MOVIES_ERROR':
+                case 'FETCH_MOVIES_FAILURE':
                         return {
+                                ...state,
                                 movies: [],
                                 loading: false,
                                 error: action.payload
