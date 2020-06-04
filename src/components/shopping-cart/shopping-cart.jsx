@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { movieAddToCart, movieRemoveFromCart, AllMoviesRemoveFromCart } from '../../actions';
+import { Link } from 'react-router-dom';
 
 import './shopping-cart.scss'
 
@@ -57,7 +58,8 @@ const ShoppingCart = ({ items, onIncrease, onDecrease, onDelete }) => {
                         </table>
                         <div className="check">
                                 <div className="check-total">Total: ${sum}</div>
-                                <button type="button" className="btn btn-outline-success check-btn">Check</button>
+                                <Link to="cart"><button type="button" className="btn btn-outline-success check-btn">Check</button></Link>
+
                         </div>
 
                 </div>
